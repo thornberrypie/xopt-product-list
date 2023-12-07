@@ -1,6 +1,12 @@
 body {
+  font-family: 'Poppins';
   justify-content: center;
   padding: 1em;
+}
+
+header img {
+  margin-bottom: 1em;
+  max-height: 40px;
 }
 
 form {

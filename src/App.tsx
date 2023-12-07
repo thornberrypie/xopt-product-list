@@ -20,7 +20,14 @@ function App() {
 
   const [productCount, setProductCount] = useState<number>(0)
   const [rows, setRows] = useState<Product[]>([])
-  const { formState, handleSubmit, register, resetField } = useForm<Product>()
+  const {
+    formState,
+    handleSubmit,
+    register,
+    resetField,
+    setFocus
+  } = useForm<Product>()
+  
   const sourceValues: string[] = [
     'ChatGPT',
     'Google',
@@ -55,6 +62,7 @@ function App() {
     resetField('title') // Clear title field when product is added
     setProductCount(id) // Update count for the next Product ID
     setRows(newRows) // Update state to add the new rpw
+    setFocus('title') // Focus title field for smoother usability
   }
 
   const renderDeleteButton = (id:number) =>
@@ -62,7 +70,10 @@ function App() {
 
   return (
     <>
-      <h1>Product List</h1>
+      <header className="text-center">
+        <img src="https://images.squarespace-cdn.com/content/v1/64d1c28001796c4cfb10805b/8072d615-916b-40c9-bf63-1e170a6bc144/xOPT_logo_green_navy.png?format=1500w" alt="xOPT logo" />
+        <h1 className="h1">Product List</h1>
+      </header>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="form-group">
           <label htmlFor="title">Product Title</label>
