@@ -3,6 +3,10 @@ body {
   padding: 1em;
 }
 
+form {
+  margin: 1em 0;
+}
+
 .form-group {
   margin-bottom: 1em;
 }
@@ -10,4 +14,16 @@ body {
 .form-actions {
   display: flex;
   justify-content: flex-end;
+}
+
+.rdg-cell {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  form {
+    min-width: 600px;
+  }
 }
