@@ -7,12 +7,15 @@ import 'react-data-grid/lib/styles.css'
 import './App.css'
 
 import Button from 'react-bootstrap/Button'
+import CloseButton from 'react-bootstrap/CloseButton'
 
 function App() {
   interface Product {
+    id: number,
     title: string,
     source: string,
     created: string,
+    delete: React.JSX.Element,
   }
 
   const [productCount, setProductCount] = useState<number>(0)
@@ -29,12 +32,22 @@ function App() {
     { key: 'title', name: 'Product Title' },
     { key: 'source', name: 'Source', width: 100},
     { key: 'created', name: 'Created' },
+    { key: 'delete', name: '', width: 60 },
   ]
+
+  const handleDeleteClick = (e:any) => {
+    const id = e.target.getAttribute('data-id')
+    const newRows = rows
+    const clickedIndex = newRows.findIndex((row) => row.id === id)
+    
+    newRows.splice(clickedIndex, 1)
+    setRows(newRows)
+  }
 
   const handleFormSubmit = (data:Product) => {
     const created = new Date().toLocaleString()
     const id = productCount + 1
-    const newRow = { ...data, id, created }
+    const newRow = { ...data, id, created, delete: renderDeleteButton(id) }
 
     const newRows = rows
     newRows.unshift(newRow) // Show rows in time descending order
@@ -42,6 +55,9 @@ function App() {
     setProductCount(id) // Update count for the next Product ID
     setRows(newRows) // Update state to add the new rpw
   }
+
+  const renderDeleteButton = (id:number) =>
+    <CloseButton data-id={id} onClick={handleDeleteClick} title="Delete this product" />
 
   return (
     <>
