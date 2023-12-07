@@ -20,7 +20,7 @@ function App() {
 
   const [productCount, setProductCount] = useState<number>(0)
   const [rows, setRows] = useState<Product[]>([])
-  const { formState, handleSubmit, register } = useForm<Product>()
+  const { formState, handleSubmit, register, resetField } = useForm<Product>()
   const sourceValues: string[] = [
     'ChatGPT',
     'Google',
@@ -52,6 +52,7 @@ function App() {
     const newRows = rows
     newRows.unshift(newRow) // Show rows in time descending order
 
+    resetField('title') // Clear title field when product is added
     setProductCount(id) // Update count for the next Product ID
     setRows(newRows) // Update state to add the new rpw
   }
